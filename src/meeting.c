@@ -5,7 +5,7 @@
 ** Login   <tbesson@epitech.net>
 ** 
 ** Started on  Sat Jul  1 14:47:10 2017 Tamsi Besson
-** Last update Sat Jul  1 17:22:24 2017 Tamsi Besson
+** Last update Sat Jul  1 22:57:34 2017 Tamsi Besson
 */
 
 #include "calendar.h"
@@ -19,20 +19,13 @@ void    disp_meeting()
   while (meeting[i].place)
     {
       j = 0;
-      printf("*\nMEETING\n");
-      printf("date: %s\n", meeting[i].date);
+      printf("*\nMEETING\ndate: %s\n", meeting[i].date);
       printf("place: %s\nwith ", meeting[i].place);
       while (meeting[i].participants[j])
       {
-        if (j > 0) printf(", ");
-        if (strcmp(meeting[i].participants[j], "1") == 0)
-          printf("David Hasselhoff");
-        if (strcmp(meeting[i].participants[j], "2") == 0)
-          printf("Pamela Anderson");
-        if (strcmp(meeting[i].participants[j], "3") == 0)
-          printf("Gena LeeNolin");
-        if (strcmp(meeting[i].participants[j++], "4") == 0)
-          printf("David Charvet");
+        if (j > 0)
+          printf(", ");
+        printf("%s", meeting[i].participants[j++]);
       }
       printf("\n");
       i++;

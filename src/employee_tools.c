@@ -5,7 +5,7 @@
 ** Login   <tbesson@epitech.net>
 ** 
 ** Started on  Sat Jul  1 15:35:08 2017 Tamsi Besson
-** Last update Sat Jul  1 17:51:44 2017 Tamsi Besson
+** Last update Sat Jul  1 23:24:29 2017 Tamsi Besson
 */
 
 #include "calendar.h"
@@ -41,8 +41,9 @@ void	invite(char *str)
 		    	k = 0;
 		    	while (meeting[j].participants[k])
 		    		k++;
-		    	printf("::%s\n", tab[i]);
 		    	meeting[j].participants[k] = tab[i];
+		    	if (!tab[i + 1])
+		    		meeting[j].participants[k][strlen(meeting[j].participants[k]) - 1] = '\0';
 		      i++;
 		    }
 	  }

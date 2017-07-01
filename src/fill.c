@@ -5,7 +5,7 @@
 ** Login   <tbesson@epitech.net>
 ** 
 ** Started on  Fri Jun 30 13:02:54 2017 Tamsi Besson
-** Last update Sat Jul  1 17:39:45 2017 Tamsi Besson
+** Last update Sat Jul  1 23:24:46 2017 Tamsi Besson
 */
 
 #include "calendar.h"
@@ -30,7 +30,7 @@ static t_meeting fill_meeting(char **parsed_line)
   while (parsed_line[i])
     {
       meet.participants[k] = malloc(strlen(parsed_line[i]) * sizeof(char) + 1);
-      meet.participants[k++] = parsed_line[i++];
+      strcpy(meet.participants[k++], parsed_line[i++]);
     }
   meet.participants[k - 1][strlen(meet.participants[k - 1]) - 1] = '\0';
   meet.participants[k] = NULL;
@@ -40,7 +40,13 @@ static t_meeting fill_meeting(char **parsed_line)
 static t_employee fill_employee(char **parsed_line)
 {
   t_employee emp;
+  int k;
 
+  k = 0;
+  while (parsed_line[k])
+  	k++;
+  if (k < 4)
+  	exit (84);
   emp.last_name = parsed_line[0];
   emp.first_name = parsed_line[1];
   emp.position = parsed_line[2];
@@ -58,6 +64,7 @@ void filler_emp(char **tab)
   i = 0;
   j = 0;
   filler_meet(tab);
+  disp_meeting();
   while (tab[i])
     {
       if (strncmp(tab[i], "new_employee", 12) == 0)
@@ -73,23 +80,17 @@ void filler_meet(char **tab)
 {
   int i;
   int k;
-  int check;
 
   i = 0;
   k = 0;
-  check = 0;
   while (tab[i])
     {
       if (strncmp(tab[i], "new_meeting", 11) == 0)
         meeting[k++] = fill_meeting(my_str_to_wordtab(tab[i], ' '));
       if (strncmp(tab[i], "invite", 6) == 0)
         invite(tab[i]);
-      if (strncmp(tab[i], "info_meetings", 13) == 0)
-        check++;
       if (strncmp(tab[i], "info_meetings sortById", 23) == 0)
         sort_meeting_by_id();
       i++;
     }
-    if (check > 0)
-        disp_meeting();
 }
